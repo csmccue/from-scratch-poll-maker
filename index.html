@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/alchemy-favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&family=Titillium+Web:wght@200;400;600&display=swap">
     <link rel="stylesheet" href="/styles/reset.css" />
@@ -22,7 +23,66 @@
     </header>
 
     <main>
+        <section class="main-section">
+            <div class="left">
+                <div class="question-container">
+                    <label>
+                        Poll Question
+                        <input name="question" id="question">
+                    </label>
+                        <br>
+                    <label>
+                        Option A
+                        <input name="option-a" id="option-a">
+                    </label>
+                    <label>
+                      Option B
+                      <input name="option-b" id="option-b">
+                    </label>
+                    <button class="start-poll" id="start-poll">
+                        Start Poll
+                    </button>
+                </div>
+                <div class="buttons">
+                    <button class="increase-option-a" id="increase-option-a">
+                        Increase Option A
+                    </button>
+                    <button class="increase-option-b" id="increase-option-b">
+                        Increase Option B
+                    </button>
+                    <button class="decrease-option-a" id="decrease-option-a">
+                        Decrease Option A
+                    </button>
+                    <button class="decrease-option-b" id="decrease-option-b">
+                        Decrease Option B
+                    </button>
+                    <button class="save-poll" id="save-poll">
+                        Save Poll
+                    </button>
+                </div>
+            </div>
+            <div class="right">
+                <div>
+                    Current Poll
+                </div>
+                <div id="current-poll-container">
+                        <div id="question"></div>
+                        <div id="option-a"></div>
+                        <div id="option-b"></div>
+                        <div id="votes-a"></div>
+                        <div id="votes-b"></div>
+                </div>
+            </div>
 
+        </section>
+        <section class="bottom">
+            <div>
+                Past Polls
+            </div>
+            <div id="past-poll-container">
+
+            </div>
+        </section>
     </main>
 
     <footer>&copy;2022 Software Developer</footer>
