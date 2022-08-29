@@ -119,7 +119,7 @@ function refreshCurrentPollEl() {
     optionBInputEl.textContent = optionB;
     
 
-    const pollEl = renderPoll(question, optionA, optionB, votesA, votesB);
+    const pollEl = renderPoll({ question, optionA, optionB, votesA, votesB });
     pollEl.classList.add('current');
     currentPollEl.append(pollEl);
 
