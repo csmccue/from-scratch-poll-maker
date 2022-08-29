@@ -1,6 +1,6 @@
 // import functions and grab DOM elements
 import { renderPoll } from './render-utils.js';
-import { createPoll } from './fetch-utils.js';
+import { createPoll, getPolls } from './fetch-utils.js';
 
 const currentPollEl = document.getElementById('current-poll-container');
 const pastPollsEl = document.getElementById('past-poll-container');
@@ -23,7 +23,7 @@ let optionA = '';
 let optionB = '';
 let votesA = 0;
 let votesB = 0;
-let pastPolls = [];
+// let pastPolls = [];
 
 startPollButton.addEventListener('click', () => {
     // get the name data from the form
@@ -46,27 +46,27 @@ startPollButton.addEventListener('click', () => {
 
 increaseOptionAButton.addEventListener('click', () => {
     votesA++;
-    console.log(votesA);  
+    // console.log(votesA);  
     refreshCurrentPollEl();
 });
 increaseOptionBButton.addEventListener('click', () => {
     votesB++;
-    console.log(votesB);  
+    // console.log(votesB);  
     refreshCurrentPollEl();
 });
 decreaseOptionAButton.addEventListener('click', () => {
     votesA--;
-    console.log(votesA);  
+    // console.log(votesA);  
     refreshCurrentPollEl();
 });
 decreaseOptionBButton.addEventListener('click', () => {
     votesB--;
-    console.log(votesB);  
+    // console.log(votesB);  
     refreshCurrentPollEl();
 });
 
 savePollButton.addEventListener('click', async () => {
-    console.log('save poll button pressed');
+    // console.log('save poll button pressed');
     const newPoll = {
         question: question,
         optionA: optionA,
@@ -128,11 +128,16 @@ function refreshCurrentPollEl() {
 //function refreshCurrentQuestion() {
     //currentQuestionEl.textContent = '';
 //}
-function displayAllPolls() {
+async function displayAllPolls() {
     currentPollEl.textContent = '';
     pastPollsEl.textContent = '';
-    for (let poll of pastPolls) {
-        const pollEl = renderPoll(poll.question, poll.optionA, poll.optionB, poll.votesA, poll.votesB);
+    const polls = await getPolls();
+    for (let poll of polls) {
+        const pollEl = renderPoll(poll);
         pastPollsEl.append(pollEl);
     } 
 }
+
+window.addEventListener('load', async () => {
+    await displayAllPolls();
+});
