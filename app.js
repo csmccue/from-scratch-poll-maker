@@ -1,5 +1,6 @@
 // import functions and grab DOM elements
 import { renderPoll } from './render-utils.js';
+import { createPoll } from './fetch-utils.js';
 
 const currentPollEl = document.getElementById('current-poll-container');
 const pastPollsEl = document.getElementById('past-poll-container');
@@ -64,7 +65,7 @@ decreaseOptionBButton.addEventListener('click', () => {
     refreshCurrentPollEl();
 });
 
-savePollButton.addEventListener('click', () => {
+savePollButton.addEventListener('click', async () => {
     console.log('save poll button pressed');
     const newPoll = {
         question: question,
@@ -73,23 +74,29 @@ savePollButton.addEventListener('click', () => {
         votesA: votesA,
         votesB: votesB,
     };
+// gotta be here right
 
-    pastPolls.push(newPoll);
-    pastPolls.textContent = '';
-    for (let poll of pastPolls) {
-        const pollEl = renderPoll(poll.question, poll.optionA, poll.optionB, poll.votesA, poll.votesB);
-        currentPollEl.append(pollEl); 
+    await createPoll(newPoll);
 
-    }
-    question = '';
-    optionA = '';
-    optionB = '';
-    votesA = 0;
-    votesB = 0;
+// ^^ look up
 
-    currentQuestionInputEl.value = '';
-    optionAInputEl.value = '';
-    optionBInputEl.value = '';
+
+    // pastPolls.push(newPoll);
+    // pastPolls.textContent = '';
+    // for (let poll of pastPolls) {
+    //     const pollEl = renderPoll(poll.question, poll.optionA, poll.optionB, poll.votesA, poll.votesB);
+    //     currentPollEl.append(pollEl); 
+
+    // }
+    // question = '';
+    // optionA = '';
+    // optionB = '';
+    // votesA = 0;
+    // votesB = 0;
+
+    // currentQuestionInputEl.value = '';
+    // optionAInputEl.value = '';
+    // optionBInputEl.value = '';
 
     refreshCurrentPollEl();
     displayAllPolls();
