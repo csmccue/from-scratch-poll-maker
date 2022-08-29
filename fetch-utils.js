@@ -5,9 +5,9 @@ const SUPABASE_KEY =
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-export async function createPoll(game) {
+export async function createPoll(poll) {
     // create a single new game in the games table using the above object
-    const response = await client.from('polls').insert(game);
+    const response = await client.from('polls').insert(poll);
     return checkError(response);
 }
 
